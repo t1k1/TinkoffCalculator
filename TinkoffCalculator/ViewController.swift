@@ -90,8 +90,20 @@ final class ViewController: UIViewController {
         } catch {
             label.text = "Ошибка"
         }
+        lastCalculation = label.text ?? "NoData"
         
         calculationHistory.removeAll()
+    }
+    
+    @IBAction func showCalculationsList(_ sender: Any) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let calculationsListVC = sb.instantiateViewController(identifier: "CalculationsListViewController")
+        
+        if let vc = calculationsListVC as? CalculationsListViewController {
+            vc.result = lastCalculation//label.text
+        }
+        
+        navigationController?.pushViewController(calculationsListVC, animated: true)
     }
     
     @IBOutlet weak var label: UILabel!
@@ -107,13 +119,16 @@ final class ViewController: UIViewController {
     }()
     
     var calculationHistory: [CalculationHistoryItem] = []
+    var lastCalculation: String = "NoData"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resetLabelText()
     }
-    
+}
+
+extension ViewController {
     func calculate() throws -> Double {
         guard case .number(let firstNumber) = calculationHistory[0] else { return 0 }
         
@@ -135,4 +150,3 @@ final class ViewController: UIViewController {
         label.text = "0"
     }
 }
-
