@@ -87,10 +87,11 @@ final class ViewController: UIViewController {
         do {
             let result = try calculate()
             label.text = numberForamatter.string(from: NSNumber(value: result))
+            
+            calculations.append((calculationHistory, result))
         } catch {
             label.text = "Ошибка"
         }
-        lastCalculation = label.text ?? "NoData"
         
         calculationHistory.removeAll()
     }
@@ -100,13 +101,14 @@ final class ViewController: UIViewController {
         let calculationsListVC = sb.instantiateViewController(identifier: "CalculationsListViewController")
         
         if let vc = calculationsListVC as? CalculationsListViewController {
-            vc.result = lastCalculation//label.text
+            vc.calculations = calculations
         }
         
         navigationController?.pushViewController(calculationsListVC, animated: true)
     }
     
     @IBOutlet weak var label: UILabel!
+    @IBOutlet var historyButton: UIButton!
     
     lazy var numberForamatter: NumberFormatter = {
         let numberForamatter = NumberFormatter()
@@ -119,12 +121,13 @@ final class ViewController: UIViewController {
     }()
     
     var calculationHistory: [CalculationHistoryItem] = []
-    var lastCalculation: String = "NoData"
+    var calculations: [(expession: [CalculationHistoryItem], result: Double)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resetLabelText()
+        historyButton.accessibilityIdentifier = "historyButton"
     }
 }
 

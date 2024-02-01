@@ -308,6 +308,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Калькулятор" id="tib-gT-Zbx"/>
                     <connections>
+                        <outlet property="historyButton" destination="5b9-2f-uHD" id="qdb-d4-EEf"/>
                         <outlet property="label" destination="Dfj-JS-Yii" id="jys-Tt-E2x"/>
                     </connections>
                 </viewController>
@@ -323,31 +324,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjL-SX-9CB">
-                                <rect key="frame" x="196.66666666666666" y="426" width="0.0" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результат:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JI7-D3-AxC">
-                                <rect key="frame" x="154.66666666666666" y="374" width="83.666666666666657" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-RK-fOH">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qvX-ft-M3R"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
-                            <constraint firstItem="FjL-SX-9CB" firstAttribute="centerY" secondItem="IwV-Q8-tPb" secondAttribute="centerY" id="DWF-8w-bam"/>
-                            <constraint firstItem="FjL-SX-9CB" firstAttribute="centerX" secondItem="IwV-Q8-tPb" secondAttribute="centerX" id="eEh-vW-jSo"/>
-                            <constraint firstItem="JI7-D3-AxC" firstAttribute="centerX" secondItem="IwV-Q8-tPb" secondAttribute="centerX" id="lcb-Pf-JU3"/>
-                            <constraint firstItem="FjL-SX-9CB" firstAttribute="top" secondItem="JI7-D3-AxC" secondAttribute="bottom" constant="31" id="xHG-wt-du4"/>
+                            <constraint firstItem="PHq-RK-fOH" firstAttribute="top" secondItem="qvX-ft-M3R" secondAttribute="top" id="6EC-lz-xwX"/>
+                            <constraint firstItem="PHq-RK-fOH" firstAttribute="leading" secondItem="qvX-ft-M3R" secondAttribute="leading" id="Qto-yg-oT6"/>
+                            <constraint firstItem="PHq-RK-fOH" firstAttribute="trailing" secondItem="qvX-ft-M3R" secondAttribute="trailing" id="gRZ-Iw-7x8"/>
+                            <constraint firstItem="qvX-ft-M3R" firstAttribute="bottom" secondItem="PHq-RK-fOH" secondAttribute="bottom" id="u5N-02-dkL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Прошлые вычисления" id="iob-5h-rHJ"/>
                     <connections>
-                        <outlet property="calculationLabel" destination="FjL-SX-9CB" id="1F5-53-A4q"/>
+                        <outlet property="tableView" destination="PHq-RK-fOH" id="cgY-UX-Coo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JQ-U2-p8a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
