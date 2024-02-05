@@ -54,23 +54,26 @@ extension CalculationsListViewController: UITableViewDelegate {
 
 extension CalculationsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return calculations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
-        let historyItem = calculations[indexPath.row]
+        let historyItem = calculations[indexPath.section]
         
         cell.configure(with: expressionToString(historyItem.expression), result: String(historyItem.result))
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let time = NSDate()
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.YYYY"
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
         
-        return formatter.string(from: time as Date)
+        return formatter.string(from: calculations[section].date as Date)
     }
 }
 
