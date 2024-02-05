@@ -88,7 +88,9 @@ final class ViewController: UIViewController {
             let result = try calculate()
             label.text = numberForamatter.string(from: NSNumber(value: result))
             
-            calculations.append((calculationHistory, result))
+            let newCalculation = Calculation(expression: calculationHistory, result: result)
+            calculations.append(newCalculation)
+            calculationHistoryStorage.setHistory(calculation: calculations)
         } catch {
             label.text = "Ошибка"
         }
@@ -121,13 +123,15 @@ final class ViewController: UIViewController {
     }()
     
     var calculationHistory: [CalculationHistoryItem] = []
-    var calculations: [(expession: [CalculationHistoryItem], result: Double)] = []
+    var calculations: [Calculation] = []
+    let calculationHistoryStorage = CalculationHistoryStorage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resetLabelText()
         historyButton.accessibilityIdentifier = "toHistoryPageButton"
+        calculations = calculationHistoryStorage.loadHistory()
     }
 }
 

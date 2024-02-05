@@ -19,6 +19,7 @@
 		D5E895072B6A46D00023271D /* CalculationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E895062B6A46D00023271D /* CalculationsListViewController.swift */; };
 		D5E8950A2B6B98D00023271D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E895092B6B98D00023271D /* HistoryTableViewCell.swift */; };
 		D5E8950C2B6B99AF0023271D /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E8950B2B6B99AF0023271D /* HistoryTableViewCell.xib */; };
+		D5E8950F2B70E11D0023271D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8950E2B70E11D0023271D /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		D5E895062B6A46D00023271D /* CalculationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationsListViewController.swift; sourceTree = "<group>"; };
 		D5E895092B6B98D00023271D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		D5E8950B2B6B99AF0023271D /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
+		D5E8950E2B70E11D0023271D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		D5E894D52B629E530023271D /* TinkoffCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				D5E8950D2B70E0CB0023271D /* Storage */,
 				D5E895082B6B98AB0023271D /* History */,
 				D5E894D62B629E530023271D /* AppDelegate.swift */,
 				D5E894D82B629E530023271D /* SceneDelegate.swift */,
@@ -142,6 +145,14 @@
 				D5E8950B2B6B99AF0023271D /* HistoryTableViewCell.xib */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		D5E8950D2B70E0CB0023271D /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D5E8950E2B70E11D0023271D /* Storage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +292,7 @@
 				D5E894D72B629E530023271D /* AppDelegate.swift in Sources */,
 				D5E894D92B629E530023271D /* SceneDelegate.swift in Sources */,
 				D5E8950A2B6B98D00023271D /* HistoryTableViewCell.swift in Sources */,
+				D5E8950F2B70E11D0023271D /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

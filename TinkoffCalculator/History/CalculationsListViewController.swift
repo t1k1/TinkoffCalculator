@@ -10,7 +10,7 @@ import UIKit
 final class CalculationsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var calculations: [(expession: [CalculationHistoryItem], result: Double)] = []
+    var calculations: [Calculation] = []
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -61,7 +61,7 @@ extension CalculationsListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
         let historyItem = calculations[indexPath.row]
         
-        cell.configure(with: expressionToString(historyItem.expession), result: String(historyItem.result))
+        cell.configure(with: expressionToString(historyItem.expression), result: String(historyItem.result))
         return cell
     }
     
