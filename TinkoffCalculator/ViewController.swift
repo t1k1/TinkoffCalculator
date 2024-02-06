@@ -134,7 +134,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         resetLabelText()
-        historyButton.accessibilityIdentifier = "toHistoryPageButton"
+        historyButton.accessibilityIdentifier = "historyButton"
         calculations = calculationHistoryStorage.loadHistory()
     }
 }
