@@ -71,7 +71,7 @@ extension CalculationsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+        formatter.dateFormat = "dd.MM.yyyy"
         
         return formatter.string(from: calculations[section].date as Date)
     }
