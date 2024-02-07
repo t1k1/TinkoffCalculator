@@ -52,6 +52,12 @@ final class ViewController: UIViewController {
             label.text = buttonText
         } else if label.text == "Ошибка" && buttonText == "," {
             label.text = "0,"
+        } else if buttonText == "pi" {
+            guard let text = label.text,
+                  let pi = Int(text) else {
+                return
+            }
+            label.text = calculatePi(number: pi)
         } else {
             label.text?.append(buttonText)
         }
@@ -159,5 +165,10 @@ extension ViewController {
     
     func resetLabelText() {
         label.text = "0"
+    }
+    
+    func calculatePi(number n: Int) -> String {
+        let π = Double.pi
+        return String(format: "%.\(n)f", π).replacingOccurrences(of: ".", with: ",")
     }
 }
