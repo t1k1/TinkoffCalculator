@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol LongPressViewProtocol {
+    var shared: UIView { get }
+    
+    func startAnimation()
+    func stopAnimation()
+}
+
 enum CalculationError: Error {
     case dividedByZero
 }
@@ -39,7 +46,7 @@ enum CalculationHistoryItem {
     case operation(Operation)
 }
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController, LongPressViewProtocol {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         guard let buttonText = sender.currentTitle else { return }
@@ -154,6 +161,19 @@ final class ViewController: UIViewController {
         let alertView = AlertView(frame: alertFrame)
         return alertView
     }()
+    var shared: UIView = {
+        let screenBounds = UIScreen.main.bounds
+        let alertHeight: CGFloat = 100
+        let alertWidth: CGFloat = screenBounds.width - 40
+        let x: CGFloat = screenBounds.width / 2 - alertWidth / 2
+        let y: CGFloat = screenBounds.height / 2 - alertHeight / 2
+        let alertFrame = CGRect(x: x, y: y, width: alertWidth, height: alertHeight)
+        
+        let view = UIView(frame: alertFrame)
+        view.backgroundColor = .green
+        
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,6 +191,54 @@ final class ViewController: UIViewController {
                 $0.layer.cornerRadius = 45
             }
         }
+        
+        shared.alpha = 0
+        view.addSubview(shared)
+        
+        let tap = UILongPressGestureRecognizer()
+        tap.addTarget(self, action: #selector(handleLongToucGesture(_:)))
+        view.addGestureRecognizer(tap)
+    }
+}
+
+extension ViewController {
+    @objc
+    func handleLongToucGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        switch gestureRecognizer.state {
+            case .possible:
+                break
+            case .began:
+                startAnimation()
+            case .changed:
+                startAnimation()
+            case .ended:
+                stopAnimation()
+            case .cancelled:
+                stopAnimation()
+            case .failed:
+                break
+            @unknown default:
+                stopAnimation()
+        }
+    }
+    
+    @objc
+    func startAnimation() {
+        if !view.contains(shared) {
+            shared.alpha = 0
+            shared.center = view.center
+            view.addSubview(shared)
+        }
+        
+        UIView.animateKeyframes(withDuration: 5.0, delay: 0.5) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) {
+                self.shared.alpha = 1
+            }
+        }
+    }
+    
+    func stopAnimation() {
+        shared.removeFromSuperview()
     }
 }
 
