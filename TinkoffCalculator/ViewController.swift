@@ -61,6 +61,10 @@ final class ViewController: UIViewController {
         } else {
             label.text?.append(buttonText)
         }
+        
+        if label.text == "3,141592" {
+            animateAlert()
+        }
     }
     
     @IBAction func operationButtonPressed(_ sender: UIButton) {
@@ -135,6 +139,17 @@ final class ViewController: UIViewController {
     var calculationHistory: [CalculationHistoryItem] = []
     var calculations: [Calculation] = []
     let calculationHistoryStorage = CalculationHistoryStorage()
+    private let alertView: AlertView = {
+        let screenBounds = UIScreen.main.bounds
+        let alertHeight: CGFloat = 100
+        let alertWidth: CGFloat = screenBounds.width - 40
+        let x: CGFloat = screenBounds.width / 2 - alertWidth / 2
+        let y: CGFloat = screenBounds.height / 2 - alertHeight / 2
+        let alertFrame = CGRect(x: x, y: y, width: alertWidth, height: alertHeight)
+        
+        let alertView = AlertView(frame: alertFrame)
+        return alertView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,6 +157,10 @@ final class ViewController: UIViewController {
         resetLabelText()
         historyButton.accessibilityIdentifier = "historyButton"
         calculations = calculationHistoryStorage.loadHistory()
+        
+        alertView.alpha = 0
+        alertView.alertText = "Вы нашли пасхалку!"
+        view.addSubview(alertView)
     }
 }
 
@@ -170,5 +189,25 @@ extension ViewController {
     func calculatePi(number n: Int) -> String {
         let π = Double.pi
         return String(format: "%.\(n)f", π).replacingOccurrences(of: ".", with: ",")
+    }
+    
+    func animateAlert() {
+        if !view.contains(alertView) {
+            alertView.alpha = 0
+            alertView.center = view.center
+            view.addSubview(alertView)
+        }
+        
+        UIView.animateKeyframes(withDuration: 2.0, delay: 0.5) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
+                self.alertView.alpha = 1
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+                var newCenter = self.label.center
+                newCenter.y -= self.alertView.bounds.height
+                self.alertView.center = newCenter
+            }
+        }
     }
 }
